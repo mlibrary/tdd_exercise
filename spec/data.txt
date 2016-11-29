@@ -1,0 +1,6 @@
+Heather: +4
+Chen: +10
+Helga: +22
+Heather: -7
+Chen: +2
+Balthazar: -1
