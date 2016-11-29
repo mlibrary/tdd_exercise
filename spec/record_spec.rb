@@ -17,6 +17,16 @@ RSpec.describe Record do
     [ "1", "-", "+" ].map {|score| described_class.new(nil, score) }
   end
 
+  let(:valid_records) do
+    ["abc: +123"].map {|line| described_class.parse(line) }
+  end
+
+  describe "::parse" do
+    it "Names will be followed by a colon and a single space." do
+      expect(valid_records[0].valid?).to be(true)
+    end
+  end
+
   describe "#valid_name?" do
     it "Names will only ever contain letters." do
       expect(valid_names[0].valid_name?).to be(true)

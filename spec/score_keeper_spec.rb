@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe ScoreKeeper do
-  let(:sk) do
-    described_class.new
-  end
 
   let(:invalid) do
     [
@@ -26,26 +23,38 @@ RSpec.describe ScoreKeeper do
     ]
   end
 
+  let(:scores) do
+    [
+      "abc: +1",
+      "abc: -1",
+      "stuff",
+      "def: +2\nabc: +1",
+      "abc: +1\ndef: +2",
+      "Heather: +4\nChen: +10\nHelga: +22\nHeather: -7\nChen: +2\nBalthazar: -1"
+    ].map { |string| described_class.new(string) } 
+  end
 
-  describe "The input string will always be valid." do
-
-    it "Names will be followed by a colon and a single space" do
-      expect(sk.valid?(valid[0])).to be(true)
-      expect(sk.valid?(invalid[1])).to be(false)
+  describe "#add" do
+    it "The input string will always be valid." do
+      expect(scores[0].to_s).to eq("abc: +1")
+      expect(scores[2].to_s).to eq("")
     end
+  end
 
+  describe "::valid?" do
+    it "Items in the list will be separated by new line characters" do
+       expect(described_class.valid?(valid[3])).to be(true)
+    end
+  end
+
+  describe "#to_s" do
     it "The output names should be in alphabetical order." do
-      expect(sk.add(valid[3])).to eq(valid[4])
-      expect(sk.add(valid[4])).to eq(valid[4])
+      expect(scores[3].to_s).to eq(valid[4])
+      expect(scores[4].to_s).to eq(valid[4])
     end
 
     it "Scores can go negative" do
-      expect(sk.add(valid[5])).to eq("Balthazar: -1\nChen: +12\nHeather: -3\nHelga: +22")
+      expect(scores[5].to_s).to eq("Balthazar: -1\nChen: +12\nHeather: -3\nHelga: +22")
     end
-
-    it "items in the list will be separated by new line characters" do
-       expect(sk.valid?(valid[3])).to be(true)
-    end
-
   end
 end
