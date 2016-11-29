@@ -51,5 +51,5 @@ export const tallyScores = (input) => {
     return string
   }, '')
 
-  return serialized_to_string
+  return serialize
 }
