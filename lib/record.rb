@@ -8,10 +8,10 @@ class Record
   end
 
   def valid_name?
-    name && VALID_NAME_RE.match(name)
+    !!(name && VALID_NAME_RE.match(name))
   end
 
   def valid_score?
-    score && VALID_SCORE_RE.match(score)
+    !!(score && VALID_SCORE_RE.match(score))
   end
 end

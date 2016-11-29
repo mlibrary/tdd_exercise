@@ -28,21 +28,10 @@ RSpec.describe ScoreKeeper do
 
 
   describe "The input string will always be valid." do
-    it "Allows names only with letters" do
-      expect(sk.valid?(invalid[0])).to be(false)
-      expect(sk.valid?(valid[0])).to be(true)
-    end
 
     it "Names will be followed by a colon and a single space" do
+      expect(sk.valid?(valid[0])).to be(true)
       expect(sk.valid?(invalid[1])).to be(false)
-    end
-
-    it "Scores/points must be preceded by a + or - depending on whether it is positive or negative." do
-      expect(sk.valid?(invalid[2])).to be(false)
-      expect(sk.valid?(invalid[3])).to be(false)
-      expect(sk.valid?(invalid[4])).to be(false)
-      expect(sk.valid?(valid[1])).to be(true)
-      expect(sk.valid?(valid[2])).to be(true)
     end
 
     it "The output names should be in alphabetical order." do
